@@ -7,51 +7,46 @@ namespace DynamicList
 {
     public class DynamicList<T> : IEnumerable<T>
     {
-        public T[] dynamicList;
+        private T[] _dynamicList;
 
         public DynamicList()
         {
-            dynamicList = new T[0];
+            _dynamicList = new T[0];
         }
 
-        public T[] Items
-        {
-            get { return dynamicList; }
-        }
+        public T[] Items => _dynamicList;
 
-        public int Count
-        {
-            get { return dynamicList.Length; }
-        }
+        public int Count => _dynamicList.Length;
 
         public void Add(T item)
         {
-            Array.Resize(ref dynamicList, dynamicList.Length + 1);
-            dynamicList[dynamicList.Length - 1] = item;
+            Array.Resize(ref _dynamicList, _dynamicList.Length + 1);
+            _dynamicList[_dynamicList.Length - 1] = item;
         }
 
         public void Remove(T item)
         {
-            dynamicList = dynamicList.Except(new T[] {item}).ToArray();
+            _dynamicList = _dynamicList.Except(new T[] {item}).ToArray();
         }
 
         public void RemoveAt(int removalIndex)
         {
-            if ((removalIndex < 0) || (removalIndex > dynamicList.Length - 1)) return;
-            for (int i = removalIndex; i < dynamicList.Length - 1; i++)
-                dynamicList[i] = dynamicList[i + 1];
-
-            Array.Resize(ref dynamicList, dynamicList.Length - 1);
+            if (removalIndex < 0 || removalIndex > _dynamicList.Length - 1) throw new IndexOutOfRangeException();
+            for (int i = removalIndex; i < _dynamicList.Length - 1; i++)
+            {
+                _dynamicList[i] = _dynamicList[i + 1];
+            }
+            Array.Resize(ref _dynamicList, _dynamicList.Length - 1);
         }
 
         public void Clear()
         {
-            dynamicList = new T[0];
+            _dynamicList = new T[0];
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            foreach (T item in dynamicList)
+            foreach (var item in _dynamicList)
             {
                 yield return item;
             }
@@ -59,7 +54,7 @@ namespace DynamicList
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
     }
 }

@@ -11,11 +11,8 @@ namespace UnitTest
         public void TestItems()
         {
             int[] desiredList = new int[] { 1, 2, 3 };
-            DynamicList<int> list = new DynamicList<int>();
-            list.Add(1);
-            list.Add(2);
-            list.Add(3);
-            for (int i = 0; i < list.Count; i++)
+            var list = new DynamicList<int> {1, 2, 3};
+            for (var i = 0; i < list.Count; i++)
                 Assert.AreEqual(list.Items[i], desiredList[i]);
         }
 
@@ -23,12 +20,7 @@ namespace UnitTest
         public void TestCount()
         {
             int[] desiredList = new int[] { 1, 2, 3, 4, 5 };
-            DynamicList<int> list = new DynamicList<int>();
-            list.Add(1);
-            list.Add(2);
-            list.Add(3);
-            list.Add(4);
-            list.Add(5);
+            DynamicList<int> list = new DynamicList<int> {1, 2, 3, 4, 5};
             Assert.AreEqual(list.Count, desiredList.Length);
         }
 
@@ -36,10 +28,7 @@ namespace UnitTest
         public void TestAdd()
         {
             int[] desiredList = new int[] {123, 456, 789};
-            DynamicList<int> list = new DynamicList<int>();
-            list.Add(123);
-            list.Add(456);
-            list.Add(789);
+            DynamicList<int> list = new DynamicList<int> {123, 456, 789};
             Assert.AreEqual(list.Items[0], desiredList[0]);
             Assert.AreEqual(list.Items[1], desiredList[1]);
             Assert.AreEqual(list.Items[2], desiredList[2]);
@@ -49,12 +38,7 @@ namespace UnitTest
         public void TestRemove()
         {
             int[] desiredList = new int[] { 123, 789 };
-            DynamicList<int> list = new DynamicList<int>();
-            list.Add(123);
-            list.Add(456);
-            list.Add(456);
-            list.Add(456);
-            list.Add(789);
+            DynamicList<int> list = new DynamicList<int> {123, 456, 456, 456, 789};
             list.Remove(456);
             int i = 0;
             foreach (int item in list)
@@ -68,10 +52,7 @@ namespace UnitTest
         public void TestRemoveAt()
         {
             int[] desiredList = new int[] { 34, 56 };
-            DynamicList<int> list = new DynamicList<int>();
-            list.Add(12);
-            list.Add(34);
-            list.Add(56);
+            DynamicList<int> list = new DynamicList<int> {12, 34, 56};
             list.RemoveAt(0);
             int i = 0;
             foreach (int item in list)
